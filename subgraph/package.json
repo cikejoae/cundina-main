@@ -1,0 +1,19 @@
+ {
+   "name": "cundinablock-subgraph",
+   "version": "0.0.1",
+   "description": "Subgraph for CundinaBlock on-chain indexing",
+   "scripts": {
+     "codegen": "graph codegen",
+     "build": "graph build",
+     "deploy": "graph deploy --studio cundinablock-v1",
+     "create-local": "graph create --node http://localhost:8020/ cundinablock-v1",
+     "remove-local": "graph remove --node http://localhost:8020/ cundinablock-v1",
+     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 cundinablock-v1"
+   },
+   "dependencies": {
+     "@graphprotocol/graph-ts": "^0.32.0"
+   },
+   "devDependencies": {
+     "@graphprotocol/graph-cli": "^0.68.0"
+   }
+ }

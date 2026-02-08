@@ -1,0 +1,18 @@
+{
+  "name": "cundina-block-contracts",
+  "version": "1.0.0",
+  "description": "Smart contracts for Cundina Block platform",
+  "scripts": {
+    "compile": "hardhat compile",
+    "compile-extract": "node scripts/compile-and-extract.js",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.1"
+  }
+}

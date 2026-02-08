@@ -1,0 +1,22 @@
+project_id = "uydwuklfysyaipbitdqj"
+
+[functions.deploy-contracts]
+verify_jwt = false
+
+[functions.delete-auth-users]
+verify_jwt = false
+
+[functions.wallet-auth]
+verify_jwt = false
+
+[functions.block-members-public]
+verify_jwt = false
+
+[functions.import-test-wallets]
+verify_jwt = false
+
+[functions.test-blocks]
+verify_jwt = false
+
+[functions.subgraph-proxy]
+verify_jwt = false

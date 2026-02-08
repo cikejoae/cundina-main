@@ -1,0 +1,158 @@
+ # The Graph Subgraph Schema for CundinaBlock
+ # This file defines the entities that will be indexed from on-chain events
+ # Deploy with: graph deploy --studio cundinablock-v1
+ 
+ # ============= User Entity =============
+ # Indexed from UserRegistered and ReferralCodeGenerated events
+ 
+ type User @entity {
+   "Wallet address (lowercase)"
+   id: Bytes!
+   
+   "Current level in the system (1-7)"
+   level: Int!
+   
+   "User who referred this user (null if organic)"
+   referrer: User
+   
+   "Auto-generated or custom referral code (bytes32)"
+   referralCode: Bytes!
+   
+   "Blocks created by this user"
+   blocks: [Block!]! @derivedFrom(field: "owner")
+   
+   "Blocks where this user is a member"
+   memberships: [BlockMember!]! @derivedFrom(field: "member")
+   
+   "Users referred by this user"
+   invitedUsers: [User!]! @derivedFrom(field: "referrer")
+   
+   "Unix timestamp when user registered"
+   registeredAt: BigInt!
+ }
+ 
+ # ============= Block Entity =============
+ # Indexed from MyBlockCreated, MemberJoined, BlockCompleted events
+ 
+ type Block @entity {
+   "Block contract address (lowercase)"
+   id: Bytes!
+   
+   "User who created this block"
+   owner: User!
+   
+   "Level ID (1-7)"
+   levelId: Int!
+   
+   "Block status: 0 = Active, 1 = Completed"
+   status: Int!
+   
+   "Members of this block"
+   members: [BlockMember!]! @derivedFrom(field: "block")
+   
+   "Number of users invited to the platform via this block's owner"
+   invitedCount: Int!
+   
+   "Unix timestamp when block was created"
+   createdAt: BigInt!
+   
+   "Unix timestamp when block was completed (null if active)"
+   completedAt: BigInt
+ }
+ 
+ # ============= BlockMember Entity =============
+ # Indexed from MemberJoined events
+ 
+ type BlockMember @entity {
+   "Composite ID: block_address + member_address"
+   id: ID!
+   
+   "The block this membership belongs to"
+   block: Block!
+   
+   "The user who is a member"
+   member: User!
+   
+   "Position in the block (1-9 for Level 1)"
+   position: Int!
+   
+   "Unix timestamp when member joined"
+   joinedAt: BigInt!
+ }
+ 
+# ============= Transaction Entity =============
+# Indexed from all payment-related events
+
+type Transaction @entity {
+  "Transaction hash"
+  id: Bytes!
+  
+  "User who initiated the transaction"
+  user: User!
+  
+  "Type: registration, join, advance, withdraw"
+  type: String!
+  
+  "Amount in USDT (wei)"
+  amount: BigInt!
+  
+  "Related block (if applicable)"
+  block: Block
+  
+  "Unix timestamp of the transaction"
+  timestamp: BigInt!
+}
+
+# ============= Ranking Snapshot Entity =============
+# Tracks block positions over time for trend calculation
+# Created when invitedCount changes or new blocks are added
+
+type RankingSnapshot @entity {
+  "Composite ID: block_address + unix_day"
+  id: ID!
+  
+  "The block this snapshot belongs to"
+  block: Block!
+  
+  "Level ID for filtering"
+  levelId: Int!
+  
+  "Number of invited users at this snapshot"
+  invitedCount: Int!
+  
+  "Number of members at this snapshot"
+  memberCount: Int!
+  
+  "Unix day (timestamp / 86400) for daily aggregation"
+  day: BigInt!
+  
+  "Unix timestamp of the snapshot"
+  timestamp: BigInt!
+}
+
+# ============= Daily Ranking Aggregate =============
+# Stores the computed ranking position for each block per day
+# This allows querying historical positions efficiently
+
+type DailyRankingPosition @entity {
+  "Composite ID: levelId + day + block_address"
+  id: ID!
+  
+  "The block"
+  block: Block!
+  
+  "Level ID"
+  levelId: Int!
+  
+  "Unix day number"
+  day: BigInt!
+  
+  "Computed position in the ranking (1 = top)"
+  position: Int!
+  
+  "Invited count used for this ranking"
+  invitedCount: Int!
+  
+  "Timestamp when this position was recorded"
+  timestamp: BigInt!
+}

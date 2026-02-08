@@ -1,0 +1,67 @@
+ # The Graph Subgraph Manifest for CundinaBlock
+ # Deploy with: graph deploy --studio cundinablock-v1
+ 
+ specVersion: 0.0.5
+ schema:
+   file: ./schema.graphql
+ 
+ dataSources:
+   - kind: ethereum
+     name: BlockRegistryFactory
+     network: sepolia
+     source:
+      address: "0xd13e3b5b61dEb4f4D1cfdc26988875FA9022AE5E"
+       abi: BlockRegistryFactory
+      startBlock: 8200000
+     mapping:
+       kind: ethereum/events
+       apiVersion: 0.0.7
+       language: wasm/assemblyscript
+        entities:
+          - User
+          - Block
+          - BlockMember
+          - Transaction
+          - RankingSnapshot
+          - DailyRankingPosition
+       abis:
+         - name: BlockRegistryFactory
+           file: ./abis/BlockRegistryFactory.json
+       eventHandlers:
+         - event: UserRegistered(indexed address,indexed address,uint256)
+           handler: handleUserRegistered
+         - event: MyBlockCreated(indexed address,indexed uint256,address)
+           handler: handleMyBlockCreated
+         - event: ReferralCodeGenerated(indexed address,indexed bytes32)
+           handler: handleReferralCodeGenerated
+         - event: ReferralChainCreated(indexed address,indexed address)
+           handler: handleReferralChainCreated
+          - event: InviteCountUpdated(indexed address,uint256)
+            handler: handleInviteCountUpdated
+          - event: BlockSettled(indexed address,indexed address,uint256,bool,address)
+            handler: handleBlockSettled
+        file: ./src/registry.ts
+ 
+ templates:
+   - kind: ethereum
+     name: CundinaBlockSecure
+     network: sepolia
+     source:
+       abi: CundinaBlockSecure
+     mapping:
+       kind: ethereum/events
+       apiVersion: 0.0.7
+       language: wasm/assemblyscript
+       entities:
+         - Block
+         - BlockMember
+         - Transaction
+       abis:
+         - name: CundinaBlockSecure
+           file: ./abis/CundinaBlockSecure.json
+       eventHandlers:
+         - event: MemberJoined(indexed address,indexed uint256,uint256)
+           handler: handleMemberJoined
+         - event: BlockCompleted(indexed uint256)
+           handler: handleBlockCompleted
+       file: ./src/block.ts

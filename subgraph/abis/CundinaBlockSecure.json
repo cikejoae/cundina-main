@@ -1,0 +1,34 @@
+ [
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "member", "type": "address"},
+       {"indexed": true, "internalType": "uint256", "name": "position", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256"}
+     ],
+     "name": "MemberJoined",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "uint256", "name": "completedAt", "type": "uint256"}
+     ],
+     "name": "BlockCompleted",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "token", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "registry", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "treasurySafe", "type": "address"},
+       {"indexed": false, "internalType": "address", "name": "center", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "levelId", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "requiredMembers", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "contributionAmount", "type": "uint256"}
+     ],
+     "name": "Initialized",
+     "type": "event"
+   }
+ ]

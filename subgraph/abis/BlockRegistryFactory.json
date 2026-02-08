@@ -1,0 +1,94 @@
+ [
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "user", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "referrer", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "level", "type": "uint256"}
+     ],
+     "name": "UserRegistered",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "center", "type": "address"},
+       {"indexed": true, "internalType": "uint256", "name": "level", "type": "uint256"},
+       {"indexed": false, "internalType": "address", "name": "blockAddress", "type": "address"}
+     ],
+     "name": "MyBlockCreated",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "wallet", "type": "address"},
+       {"indexed": true, "internalType": "bytes32", "name": "code", "type": "bytes32"}
+     ],
+     "name": "ReferralCodeGenerated",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "user", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "referrer", "type": "address"}
+     ],
+     "name": "ReferralChainCreated",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "blockAddr", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "newCount", "type": "uint256"}
+     ],
+     "name": "InviteCountUpdated",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "user", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "level", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "fee", "type": "uint256"},
+       {"indexed": true, "internalType": "address", "name": "treasurySafe", "type": "address"}
+     ],
+     "name": "RegistrationPaid",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "referrer", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "referrerBlock", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "level", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "newSlots", "type": "uint256"}
+     ],
+     "name": "SlotGranted",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "user", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "fromLevel", "type": "uint256"},
+       {"indexed": false, "internalType": "uint256", "name": "toLevel", "type": "uint256"},
+       {"indexed": true, "internalType": "address", "name": "targetBlock", "type": "address"}
+     ],
+     "name": "UpgradedAndJoined",
+     "type": "event"
+   },
+   {
+     "anonymous": false,
+     "inputs": [
+       {"indexed": true, "internalType": "address", "name": "blockAddress", "type": "address"},
+       {"indexed": true, "internalType": "address", "name": "center", "type": "address"},
+       {"indexed": false, "internalType": "uint256", "name": "level", "type": "uint256"},
+       {"indexed": false, "internalType": "bool", "name": "advanced", "type": "bool"},
+       {"indexed": false, "internalType": "address", "name": "payoutTo", "type": "address"}
+     ],
+     "name": "BlockSettled",
+     "type": "event"
+   }
+ ]
